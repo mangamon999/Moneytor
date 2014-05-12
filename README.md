@@ -1,0 +1,4 @@
+Moneytor
+========
+
+Expenses monitor
