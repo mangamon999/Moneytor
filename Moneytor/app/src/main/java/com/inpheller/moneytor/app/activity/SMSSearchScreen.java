@@ -1,6 +1,4 @@
-package com.inpheller.moneytor.app;
-
-import com.inpheller.moneytor.app.util.SystemUiHider;
+package com.inpheller.moneytor.app.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -9,6 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.inpheller.moneytor.app.R;
+import com.inpheller.moneytor.app.util.SystemUiHider;
 
 
 /**
@@ -113,6 +114,8 @@ public class SMSSearchScreen extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+
+        new com.inpheller.moneytor.app.sms.SmsHelper(this).getAllMessages();
     }
 
     @Override
