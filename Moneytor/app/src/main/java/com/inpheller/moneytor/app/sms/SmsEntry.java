@@ -6,9 +6,29 @@ import android.database.Cursor;
  * Created by brunopinheiro on 5/13/14.
  */
 public class SmsEntry {
+
+    public static final String[] COLUMN_NAMES = new String[]{"_id", "thread_id", "address", "person", "date", "date_sent",
+            "protocol", "read", "status", "type", "reply_path_present", "subject", "body", "service_center",
+            "locked", "sub_id", "error_code", "seen"};
+
     private String id = "_id";
     private String threadId = "thread_id";
     private String address = "address";
+    private String person = "person";
+    private String date = "date";
+    private String dateSent = "date_sent";
+    private String protocol = "protocol";
+    private String read = "read";
+    private String status = "status";
+    private String type = "type";
+    private String replyPathPresent = "reply_path_present";
+    private String subject = "subject";
+    private String body = "body";
+    private String serviceCenter = "service_center";
+    private String locked = "locked";
+    private String subId = "sub_id";
+    private String errorCode = "error_code";
+    private String seen = "seen";
 
     public SmsEntry() {
 
@@ -38,44 +58,6 @@ public class SmsEntry {
 
         return smsEntry;
     }
-
-    public SmsEntry(String id, String threadId, String address, String person, String date, String dateSent, String protocol, String read, String status, String type, String replyPathPresent, String subject, String body, String serviceCenter, String locked, String subId, String errorCode, String seen) {
-        this.id = id;
-        this.threadId = threadId;
-        this.address = address;
-        this.person = person;
-        this.date = date;
-        this.dateSent = dateSent;
-        this.protocol = protocol;
-
-        this.read = read;
-        this.status = status;
-        this.type = type;
-        this.replyPathPresent = replyPathPresent;
-        this.subject = subject;
-        this.body = body;
-        this.serviceCenter = serviceCenter;
-        this.locked = locked;
-        this.subId = subId;
-        this.errorCode = errorCode;
-        this.seen = seen;
-    }
-
-    private String person = "person";
-    private String date = "date";
-    private String dateSent = "date_sent";
-    private String protocol = "protocol";
-    private String read = "read";
-    private String status = "status";
-    private String type = "type";
-    private String replyPathPresent = "reply_path_present";
-    private String subject = "subject";
-    private String body = "body";
-    private String serviceCenter = "service_center";
-    private String locked = "locked";
-    private String subId = "sub_id";
-    private String errorCode = "error_code";
-    private String seen = "seen";
 
     public String getId() {
         return id;

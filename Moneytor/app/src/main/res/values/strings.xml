@@ -4,5 +4,6 @@
     <string name="app_name">Moneytor</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="contact_thumbnail_description">Contact Thumnail</string>
 
 </resources>
