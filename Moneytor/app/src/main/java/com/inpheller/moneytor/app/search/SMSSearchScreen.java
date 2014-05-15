@@ -1,10 +1,13 @@
 package com.inpheller.moneytor.app.search;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ListView;
@@ -20,7 +23,7 @@ import com.inpheller.moneytor.app.util.SystemUiHider;
  *
  * @see SystemUiHider
  */
-public class SmsSearchScreen extends Activity {
+public class SmsSearchScreen extends ActionBarActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -116,7 +119,7 @@ public class SmsSearchScreen extends Activity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         // FIXME: Update this
-        ((ListView)findViewById(R.id.sms_list)).setAdapter(new SmsListAdapter(this, R.layout.sms_list_item, new SmsHelper(this).getAllMessages()));
+        ((ListView) findViewById(R.id.sms_list)).setAdapter(new SmsListAdapter(this, R.layout.sms_list_item, new SmsHelper(this).getAllMessages()));
     }
 
     @Override
@@ -160,5 +163,25 @@ public class SmsSearchScreen extends Activity {
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_screen_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_search:
+//                openSearch();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
