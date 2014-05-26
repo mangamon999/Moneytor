@@ -1,6 +1,7 @@
 package com.inpheller.moneytor.app.search;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,9 +11,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.inpheller.moneytor.app.R;
+import com.inpheller.moneytor.app.rules.RuleEditorScreen;
+import com.inpheller.moneytor.app.sms.SmsEntry;
 import com.inpheller.moneytor.app.sms.SmsHelper;
 import com.inpheller.moneytor.app.util.SystemUiHider;
 
@@ -51,6 +56,8 @@ public class SmsSearchScreen extends ActionBarActivity {
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
+    private SmsListAdapter smsListAdapter;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +126,19 @@ public class SmsSearchScreen extends ActionBarActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         // FIXME: Update this
-        ((ListView) findViewById(R.id.sms_list)).setAdapter(new SmsListAdapter(this, R.layout.sms_list_item, new SmsHelper(this).getAllMessages()));
+        smsListAdapter = new SmsListAdapter(this, R.layout.sms_list_item, new SmsHelper(this).getAllMessages());
+        listView = (ListView) findViewById(R.id.sms_list);
+        listView.setAdapter(smsListAdapter);
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                SmsEntry smsEntry = smsListAdapter.getItem(i);
+                Intent intent = new Intent(SmsSearchScreen.this, RuleEditorScreen.class);
+                intent.putExtra(RuleEditorScreen.PARAM_SMS_MESSAGE, smsEntry.getBody());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -144,6 +163,7 @@ public class SmsSearchScreen extends ActionBarActivity {
             if (AUTO_HIDE) {
                 delayedHide(AUTO_HIDE_DELAY_MILLIS);
             }
+
             return false;
         }
     };

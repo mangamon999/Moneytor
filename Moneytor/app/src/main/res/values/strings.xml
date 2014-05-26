@@ -6,5 +6,8 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="contact_thumbnail_description">Contact Thumnail</string>
     <string name="action_search">Search</string>
+    <string name="title_activity_rule_editor_screen">RuleEditorScreen</string>
+    <string name="identify_messages">Chose words that always appear in the messages you want to track and tap "next".</string>
+    <string name="action_settings">Settings</string>
 
 </resources>
