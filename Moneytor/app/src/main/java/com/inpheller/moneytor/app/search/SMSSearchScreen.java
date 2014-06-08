@@ -16,10 +16,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.inpheller.moneytor.app.R;
+import com.inpheller.moneytor.app.model.DatabaseHelper;
+import com.inpheller.moneytor.app.model.entity.Expense;
 import com.inpheller.moneytor.app.rules.RuleEditorScreen;
 import com.inpheller.moneytor.app.sms.SmsEntry;
 import com.inpheller.moneytor.app.sms.SmsHelper;
 import com.inpheller.moneytor.app.util.SystemUiHider;
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+
+import java.util.List;
 
 
 /**
@@ -139,6 +144,9 @@ public class SmsSearchScreen extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        List<Expense> expenses = getHelper().getExpenseDao().queryForAll();
+        expenses.get(0);
     }
 
     @Override
@@ -203,5 +211,22 @@ public class SmsSearchScreen extends ActionBarActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private DatabaseHelper databaseHelper = null;
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
+    }
+    private DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper =
+                    OpenHelperManager.getHelper(this, DatabaseHelper.class);
+        }
+        return databaseHelper;
     }
 }
