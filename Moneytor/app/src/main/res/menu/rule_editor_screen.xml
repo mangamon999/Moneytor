@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.inpheller.moneytor.app.screen.rules.RuleEditorScreen" >
     
-    <item android:id="@+id/action_create"
-        android:title="@string/action_create"
+    <item android:id="@+id/action_test_rule"
+        android:title="@string/action_test_rule"
         android:orderInCategory="1"
         android:showAsAction="always" />
 </menu>

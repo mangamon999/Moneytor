@@ -97,7 +97,7 @@ public class RuleEditorScreen extends OrmLiteBaseActivity<DatabaseHelper> {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_create) {
+        if (id == R.id.action_test_rule) {
 
             String regex = "^";
             boolean previousWasWildcard = false;
@@ -126,7 +126,7 @@ public class RuleEditorScreen extends OrmLiteBaseActivity<DatabaseHelper> {
             regex += "$";
 
             Dao<Rule, Integer> rulesDao = getHelper().getRulesDao();
-            List<Rule> rules = null;
+            List<Rule> rules;
             try {
                 rules = rulesDao.queryForEq(Rule.REGEX_FIELD_NAME, regex);
 
@@ -135,12 +135,6 @@ public class RuleEditorScreen extends OrmLiteBaseActivity<DatabaseHelper> {
                     ruleTest.putExtra(RuleTestScreen.PARAM_RULE_REGEX, regex);
 
                     startActivity(ruleTest);
-
-//                    Rule rule = new Rule();
-//                    rule.setDao(rulesDao);
-//
-//                    rule.setRegex(regex);
-//                    rule.create();
                 } else {
                     Log.e(getClass().getName(), "This rule already exists!!! Duplications are not allowed");
                     //TODO: Create dialog

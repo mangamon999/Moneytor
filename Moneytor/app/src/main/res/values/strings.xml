@@ -14,5 +14,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="app_label">Moneytor</string>
     <string name="search_hint">Search Message</string>
+    <string name="action_test_rule">Test</string>
 
 </resources>
