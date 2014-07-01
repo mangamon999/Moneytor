@@ -15,5 +15,6 @@
     <string name="app_label">Moneytor</string>
     <string name="search_hint">Search Message</string>
     <string name="action_test_rule">Test</string>
+    <string name="title_activity_rule_list_screen">RuleListScreen</string>
 
 </resources>

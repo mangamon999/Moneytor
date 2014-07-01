@@ -56,7 +56,7 @@ public class RuleTestScreen extends OrmLiteBaseActivity<DatabaseHelper> {
             Dao<Rule, Integer> rulesDao = getHelper().getRulesDao();
             List<Rule> rules;
 
-            Rule rule = new Rule();
+            Rule rule = new Rule("new rule", regex);
             rule.setDao(rulesDao);
 
             rule.setRegex(regex);

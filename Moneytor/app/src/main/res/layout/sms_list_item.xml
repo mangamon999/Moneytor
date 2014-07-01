@@ -2,6 +2,7 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@android:color/holo_blue_dark"
     android:padding="10dp"
     android:layout_height="match_parent">
 
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="Sender:14999"
         android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:textSize="20sp"/>
 
     <TextView
@@ -30,6 +32,7 @@
         android:layout_height="wrap_content"
         android:lines="2"
         android:text="Lorem ipsum dolor sit amet, arcu erat ut nunc, justo porta interdum blandit ut. Donec metus fringilla nec pede"
+        android:textColor="@android:color/white"
         android:ellipsize="end"
         android:textSize="15sp"/>
 
