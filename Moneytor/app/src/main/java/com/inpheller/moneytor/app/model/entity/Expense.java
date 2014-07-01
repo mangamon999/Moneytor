@@ -1,7 +1,12 @@
 package com.inpheller.moneytor.app.model.entity;
 
+import com.inpheller.moneytor.app.model.dao.ExpensesDao;
+import com.inpheller.moneytor.app.model.relationship.ExpenseLabel;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.misc.BaseDaoEnabled;
+import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.util.Date;
@@ -9,8 +14,8 @@ import java.util.Date;
 /**
  * Created by mangamon on 5/26/14.
  */
-@DatabaseTable(tableName = "expenses")
-public class Expense {
+@DatabaseTable(tableName = "expenses", daoClass = ExpensesDao.class)
+public class Expense extends BaseDaoEnabled {
 
     @DatabaseField(generatedId = true)
     private long id;
@@ -20,8 +25,12 @@ public class Expense {
     private Float ammount;
     @DatabaseField
     private Date date;
-//    @ForeignCollectionField
-//    private List<Label> labels;
+
+    public Expense() {
+    }
+
+    //    @ForeignCollectionField
+//    private ForeignCollection<ExpenseLabel> expenseLabels;
 
     public long getId() {
         return id;
@@ -55,11 +64,11 @@ public class Expense {
         this.date = date;
     }
 
-//    public List<Label> getLabels() {
-//        return labels;
+//    public ForeignCollection<ExpenseLabel> getLabels() {
+//        return expenseLabels;
 //    }
 //
-//    public void setLabels(List<Label> labels) {
-//        this.labels = labels;
+//    public void setLabels(ForeignCollection<ExpenseLabel> expenseLabels) {
+//        this.expenseLabels = expenseLabels;
 //    }
 }

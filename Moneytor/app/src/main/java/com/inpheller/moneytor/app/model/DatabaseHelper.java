@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.inpheller.moneytor.app.model.entity.Expense;
 import com.inpheller.moneytor.app.model.entity.Label;
+import com.inpheller.moneytor.app.model.entity.Rule;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
@@ -28,8 +29,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // the DAO object we use to access the Expense table
-    private Dao<Expense, Integer> simpleDao = null;
-    private RuntimeExceptionDao<Expense, Integer> simpleRuntimeDao = null;
+    private Dao<Expense, Integer> expensesDao = null;
+    private Dao<Rule, Integer> rulesDao;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -45,26 +46,27 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
             TableUtils.createTable(connectionSource, Expense.class);
             TableUtils.createTable(connectionSource, Label.class);
+            TableUtils.createTable(connectionSource, Rule.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
         }
 
-        // here we try inserting data in the on-create as a test
-        RuntimeExceptionDao<Expense, Integer> dao = getExpenseDao();
-        long millis = System.currentTimeMillis();
-        // create some entries in the onCreate
-        Expense simple = new Expense();
-        simple.setAmmount((float) millis);
-        simple.setCurrency("R$");
-        simple.setDate(new Date());
-        dao.create(simple);
-        simple = new Expense();
-        simple.setAmmount((float) millis);
-        simple.setCurrency("$");
-        simple.setDate(new Date());
-        dao.create(simple);
-        Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
+//        // here we try inserting data in the on-create as a test
+//        Dao<Expense, Integer> dao = getExpenseDao();
+//        long millis = System.currentTimeMillis();
+//        // create some entries in the onCreate
+//        Expense simple = new Expense();
+//        simple.setAmmount((float) millis);
+//        simple.setCurrency("R$");
+//        simple.setDate(new Date());
+//        dao.create(simple);
+//        simple = new Expense();
+//        simple.setAmmount((float) millis);
+//        simple.setCurrency("$");
+//        simple.setDate(new Date());
+//        dao.create(simple);
+//        Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
     }
 
     /**
@@ -86,25 +88,29 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     }
 
     /**
-     * Returns the Database Access Object (DAO) for our Expense class. It will create it or just give the cached
-     * value.
-     */
-    public Dao<Expense, Integer> getDao() throws SQLException {
-        if (simpleDao == null) {
-            simpleDao = getDao(Expense.class);
-        }
-        return simpleDao;
-    }
-
-    /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our Expense class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
      */
-    public RuntimeExceptionDao<Expense, Integer> getExpenseDao() {
-        if (simpleRuntimeDao == null) {
-            simpleRuntimeDao = getRuntimeExceptionDao(Expense.class);
+    public Dao<Expense, Integer> getExpenseDao() {
+        if (expensesDao == null) {
+            try {
+                expensesDao = getDao(Expense.class);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-        return simpleRuntimeDao;
+        return expensesDao;
+    }
+
+    public Dao<Rule, Integer> getRulesDao() {
+        if (rulesDao == null) {
+            try {
+                rulesDao = getDao(Rule.class);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return rulesDao;
     }
 
     /**
@@ -113,7 +119,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void close() {
         super.close();
-        simpleDao = null;
-        simpleRuntimeDao = null;
+        expensesDao = null;
+        rulesDao = null;
     }
 }

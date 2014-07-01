@@ -1,4 +1,4 @@
-package com.inpheller.moneytor.app.search;
+package com.inpheller.moneytor.app.screen.search;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -16,9 +16,9 @@ import java.util.List;
 /**
  * Created by mangamon on 5/13/14.
  */
-public class SmsListAdapter extends ArrayAdapter<SmsEntry> {
+public class SmsSearchListAdapter extends ArrayAdapter<SmsEntry> {
 
-    public SmsListAdapter(Context context, int resource, List<SmsEntry> objects) {
+    public SmsSearchListAdapter(Context context, int resource, List<SmsEntry> objects) {
         super(context, resource, objects);
     }
 
