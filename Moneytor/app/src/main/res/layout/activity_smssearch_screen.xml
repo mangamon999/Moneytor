@@ -27,7 +27,7 @@
         <ListView android:id="@+id/sms_list"
             style="?metaButtonBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom|center_horizontal"
             android:background="@color/black_overlay"
             tools:ignore="UselessParent">

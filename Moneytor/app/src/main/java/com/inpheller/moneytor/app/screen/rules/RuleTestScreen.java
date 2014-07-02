@@ -1,5 +1,6 @@
 package com.inpheller.moneytor.app.screen.rules;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -66,6 +67,10 @@ public class RuleTestScreen extends OrmLiteBaseActivity<DatabaseHelper> {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
+            Intent ruleListScreen = new Intent(this, RuleListScreen.class);
+            startActivity(ruleListScreen);
+            finish();
 
             return true;
         }

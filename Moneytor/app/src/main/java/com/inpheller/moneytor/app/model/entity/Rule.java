@@ -24,6 +24,8 @@ public class Rule extends BaseDaoEnabled {
     //TODO: Associate actions
 
 
+    public Rule() {}
+
     public Rule(String name, String regex) {
         this.name = name;
         this.regex = regex;
@@ -55,6 +57,22 @@ public class Rule extends BaseDaoEnabled {
 
     @Override
     public String toString() {
-        return "Rule{" + name + ": '" + regex + "'}";
+        return "Rule{" + name + ": '" + getRegexPretty() + "'}";
+    }
+
+    private String getRegexPretty() {
+
+        String[] uglyPieces = {"^\\.\\+", "^", "\\Q", "\\E", "$"};
+
+        String pretty = regex;
+
+        for (String ugly : uglyPieces) {
+            pretty = pretty.replace(ugly, "");
+        }
+
+        pretty = pretty.replaceAll("\\.\\+", " ").trim();
+        pretty = pretty.replaceAll(" ", " + ");
+
+        return pretty;
     }
 }
