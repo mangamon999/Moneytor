@@ -37,6 +37,10 @@
             android:name="com.inpheller.moneytor.app.screen.rules.RuleListScreen"
             android:label="@string/title_activity_rule_list_screen" >
         </activity>
+        <activity
+            android:name="com.inpheller.moneytor.app.screen.rules.RuleSettingsScreen"
+            android:label="@string/title_activity_rule_settings_screen" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.READ_SMS" />
