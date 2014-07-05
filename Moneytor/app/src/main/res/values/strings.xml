@@ -17,8 +17,14 @@
     <string name="action_test_rule">Test</string>
     <string name="title_activity_rule_list_screen">RuleListScreen</string>
     <string name="title_activity_rule_settings_screen">RuleSettingsScreen</string>
-    <string name="empty" />
+    <string name="empty"></string>
     <string name="rule_name_field_hint">Rule Name</string>
     <string name="rule_compontents_label_hint">Rule components</string>
+    <string name="action_save">Save</string>
+    <string name="title_activity_expense_create_screen">ExpenseCreateScreen</string>
+    <string name="default_amount">R$ 0,00</string>
+    <string name="ok">OK</string>
+    <string name="labels_input_hint">Coma separated labels</string>
+    <string name="add_button_text">Add</string>
 
 </resources>

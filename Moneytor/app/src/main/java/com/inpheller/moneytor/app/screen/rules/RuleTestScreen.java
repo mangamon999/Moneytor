@@ -54,7 +54,7 @@ public class RuleTestScreen extends OrmLiteBaseActivity<DatabaseHelper> {
         int id = item.getItemId();
         if (id == R.id.action_create) {
 
-            Dao<Rule, Integer> rulesDao = getHelper().getRulesDao();
+            Dao<Rule, Long> rulesDao = getHelper().getRulesDao();
             List<Rule> rules;
 
             Rule rule = new Rule("new rule", regex);

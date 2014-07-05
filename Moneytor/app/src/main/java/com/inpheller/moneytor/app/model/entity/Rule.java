@@ -57,10 +57,10 @@ public class Rule extends BaseDaoEnabled {
 
     @Override
     public String toString() {
-        return "Rule{" + name + ": '" + getRegexPretty() + "'}";
+        return "Rule{" + name + ": '" + getPrettyRegex() + "'}";
     }
 
-    private String getRegexPretty() {
+    public String getPrettyRegex() {
 
         String[] uglyPieces = {"^\\.\\+", "^", "\\Q", "\\E", "$"};
 

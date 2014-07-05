@@ -125,7 +125,7 @@ public class RuleEditorScreen extends OrmLiteBaseActivity<DatabaseHelper> {
 
             regex += "$";
 
-            Dao<Rule, Integer> rulesDao = getHelper().getRulesDao();
+            Dao<Rule, Long> rulesDao = getHelper().getRulesDao();
             List<Rule> rules;
             try {
                 rules = rulesDao.queryForEq(Rule.REGEX_FIELD_NAME, regex);

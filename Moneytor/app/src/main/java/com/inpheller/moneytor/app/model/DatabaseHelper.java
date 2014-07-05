@@ -30,7 +30,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
     // the DAO object we use to access the Expense table
     private Dao<Expense, Integer> expensesDao = null;
-    private Dao<Rule, Integer> rulesDao;
+    private Dao<Rule, Long> rulesDao;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -103,7 +103,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return expensesDao;
     }
 
-    public Dao<Rule, Integer> getRulesDao() {
+    public Dao<Rule, Long> getRulesDao() {
         if (rulesDao == null) {
             try {
                 rulesDao = getDao(Rule.class);

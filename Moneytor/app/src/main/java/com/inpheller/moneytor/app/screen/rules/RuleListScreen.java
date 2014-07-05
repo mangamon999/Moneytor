@@ -1,10 +1,11 @@
 package com.inpheller.moneytor.app.screen.rules;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -14,31 +15,52 @@ import com.inpheller.moneytor.app.model.entity.Rule;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 public class RuleListScreen extends OrmLiteBaseActivity<DatabaseHelper> {
 
     private ListView ruleList;
+    private ArrayList<Rule> ruleItemsList = new ArrayList<Rule>();
+    private ArrayAdapter<Rule> ruleListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rule_list_screen);
 
-        List<Rule> rules = null;
+        updateRulesList();
 
-        try {
-            rules = getHelper().getRulesDao().queryForAll();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        ArrayAdapter<Rule> ruleListAdapter = new ArrayAdapter<Rule>(this, android.R.layout.simple_list_item_1, rules);
+        ruleListAdapter = new ArrayAdapter<Rule>(this, android.R.layout.simple_list_item_1, ruleItemsList);
 
         ruleList = (ListView) findViewById(R.id.rule_list);
         ruleList.setAdapter(ruleListAdapter);
+        ruleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Rule selectedRule = ruleListAdapter.getItem(i);
+
+                Intent ruleSettingsScreen = new Intent(RuleListScreen.this, RuleSettingsScreen.class);
+                ruleSettingsScreen.putExtra(RuleSettingsScreen.PARAM_RULE_ID, selectedRule.getId());
+                startActivity(ruleSettingsScreen);
+            }
+        });
     }
 
+    private void updateRulesList() {
+        try {
+            ruleItemsList.clear();
+            ruleItemsList.addAll(getHelper().getRulesDao().queryForAll());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        updateRulesList();
+        ruleListAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
