@@ -26,5 +26,6 @@
     <string name="ok">OK</string>
     <string name="labels_input_hint">Coma separated labels</string>
     <string name="add_button_text">Add</string>
+    <string name="expense_annotations_hint">Annotations</string>
 
 </resources>

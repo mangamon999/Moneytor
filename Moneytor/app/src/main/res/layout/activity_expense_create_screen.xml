@@ -59,12 +59,16 @@
 
     </FrameLayout>
 
-    <TextView
+    <EditText
+        android:hint="@string/expense_annotations_hint"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/datePicker"
         android:layout_above="@id/footer_bar"
-        />
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:gravity="top"/>
 
 
 </RelativeLayout>
