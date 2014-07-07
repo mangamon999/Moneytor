@@ -25,6 +25,10 @@ public class Expense extends BaseDaoEnabled {
     private Float ammount;
     @DatabaseField
     private Date date;
+    @DatabaseField
+    private String labels;
+    @DatabaseField
+    private String annotations;
 
     public Expense() {
     }
@@ -63,6 +67,23 @@ public class Expense extends BaseDaoEnabled {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    public String getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(String annotations) {
+        this.annotations = annotations;
+    }
+
+    public String getLabels() {
+        return labels;
+    }
+
+    public void setLabels(String labels) {
+        this.labels = labels;
+    }
+
 
 //    public ForeignCollection<ExpenseLabel> getLabels() {
 //        return expenseLabels;

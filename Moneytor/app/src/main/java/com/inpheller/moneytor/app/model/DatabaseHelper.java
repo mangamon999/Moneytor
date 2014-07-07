@@ -26,7 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     // name of the database file for your application -- change to something appropriate for your app
     private static final String DATABASE_NAME = "moneytor.db";
     // any time you make changes to your database objects, you may have to increase the database version
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
 
     // the DAO object we use to access the Expense table
     private Dao<Expense, Integer> expensesDao = null;
@@ -51,22 +51,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
         }
-
-//        // here we try inserting data in the on-create as a test
-//        Dao<Expense, Integer> dao = getExpenseDao();
-//        long millis = System.currentTimeMillis();
-//        // create some entries in the onCreate
-//        Expense simple = new Expense();
-//        simple.setAmmount((float) millis);
-//        simple.setCurrency("R$");
-//        simple.setDate(new Date());
-//        dao.create(simple);
-//        simple = new Expense();
-//        simple.setAmmount((float) millis);
-//        simple.setCurrency("$");
-//        simple.setDate(new Date());
-//        dao.create(simple);
-//        Log.i(DatabaseHelper.class.getName(), "created new entries in onCreate: " + millis);
     }
 
     /**
