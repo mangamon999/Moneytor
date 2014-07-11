@@ -1,14 +1,17 @@
 package com.inpheller.moneytor.app.model.entity;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.misc.BaseDaoEnabled;
 import com.j256.ormlite.table.DatabaseTable;
+
+import java.io.Serializable;
 
 /**
  * Created by mangamon on 6/8/14.
  */
 @DatabaseTable(tableName = "rules")
-public class Rule extends BaseDaoEnabled {
+public class Rule extends BaseDaoEnabled implements Serializable {
 
     public static final String REGEX_FIELD_NAME = "regex";
 
@@ -20,6 +23,9 @@ public class Rule extends BaseDaoEnabled {
 
     @DatabaseField(index = true)
     private String regex;
+
+    @DatabaseField(dataType = DataType.SERIALIZABLE)
+    private String[] labels;
 
     //TODO: Associate actions
 
@@ -74,5 +80,13 @@ public class Rule extends BaseDaoEnabled {
         pretty = pretty.replaceAll(" ", " + ");
 
         return pretty;
+    }
+
+    public String[] getLabels() {
+        return labels;
+    }
+
+    public void setLabels(String[] labels) {
+        this.labels = labels;
     }
 }

@@ -1,9 +1,13 @@
 package com.inpheller.moneytor.app.screen.rules;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.inpheller.moneytor.app.R;
@@ -57,7 +61,7 @@ public class RuleTestScreen extends OrmLiteBaseActivity<DatabaseHelper> {
             Dao<Rule, Long> rulesDao = getHelper().getRulesDao();
             List<Rule> rules;
 
-            Rule rule = new Rule("new rule", regex);
+            final Rule rule = new Rule("new rule", regex);
             rule.setDao(rulesDao);
 
             rule.setRegex(regex);
@@ -68,13 +72,71 @@ public class RuleTestScreen extends OrmLiteBaseActivity<DatabaseHelper> {
                 e.printStackTrace();
             }
 
-            Intent ruleListScreen = new Intent(this, RuleListScreen.class);
-            startActivity(ruleListScreen);
-            finish();
+            askToAssociateLabels(rule);
+
+            askToApplyToExistingMessages(rule);
 
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void askToAssociateLabels(final Rule rule) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("New rule created")
+                .setMessage("Apply to existing messages?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        applyRule(rule);
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        showRuleListScreen();
+                    }
+                });
+
+        builder.show();
+    }
+
+    private void askToApplyToExistingMessages(final Rule rule) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Associate Labels")
+               .setMessage("Apply to existing messages?");
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        builder.setView(input);
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        applyRule(rule);
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        showRuleListScreen();
+                    }
+                });
+
+        builder.show();
+    }
+
+    private void showRuleListScreen() {
+        Intent ruleListScreen = new Intent(this, RuleListScreen.class);
+        startActivity(ruleListScreen);
+        finish();
+    }
+
+    private void applyRule(Rule rule) {
+        Log.d("RULES", "Apply rule not implemented");
+        showRuleListScreen();
     }
 
 }

@@ -14,7 +14,11 @@
             android:launchMode="singleTop" >
 
             <!-- android:theme="@style/FullscreenTheme" -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -41,11 +45,7 @@
         <activity
             android:name="com.inpheller.moneytor.app.screen.expense.ExpenseCreateScreen"
             android:label="@string/title_activity_expense_create_screen" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
